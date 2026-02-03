@@ -22,3 +22,32 @@ downloads/
 # --- Logs e Temporários ---
 *.log
 .DS_Store
+# ===========================
+# ADIÇÕES PARA O TESTE
+# ===========================
+
+# Dados (Evitar subir arquivos pesados ou dados sensíveis)
+*.csv
+*.zip
+*.pdf
+*.rar
+*.xlsx
+
+# Python (Preparando para a Questão 4)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+.env
+
+# Sistema Operacional e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+target/
