@@ -3,10 +3,10 @@
 Este repositório contém a solução para o teste técnico de desenvolvimento Java. O projeto foi estruturado para resolver as questões propostas de forma modular, limpa e escalável.
 
 ##  Índice
-- [Questão 1: Web Scraping e ETL da ANS](#-questão-1-web-scraping-e-etl-da-ans)
+- [Questão 1: Web Scraping e ETL da ANS](#questão-1-web-scraping-e-etl-da-ans)
 - [Questão 2: Transformação de Dados e Teste de Desempenho](#questão-2-transformação-de-dados-e-teste-de-desempenho)
 - [Questão 3: Banco de Dados e Análise de Dados](#questão-3-banco-de-dados-e-análise-de-dados)
-- [Questão 4: Aplicação Full Stack (Dashboard ANS)](#-questão-4-aplicação-full-stack-dashboard-ans)
+- [Questão 4: Aplicação Full Stack (Dashboard ANS)](#questão-4-aplicação-full-stack-dashboard-ans)
 
 ---
 
@@ -106,10 +106,10 @@ As queries foram desenvolvidas para resolver os seguintes desafios de negócio:
 
 ## Questão 4: Aplicação Full Stack (Dashboard ANS)
 
-### ### Objetivo
+###  Objetivo
 Desenvolver uma interface web para visualização dos dados das operadoras, permitindo busca, paginação e análise visual por meio de gráficos.
 
-### ### Funcionalidades Implementadas
+###  Funcionalidades Implementadas
 1. **API RESTful:** Backend em Python para fornecimento de dados em tempo real.
 2. **Dashboard Dinâmico:** Interface Vue.js com filtragem instantânea por CNPJ ou Razão Social.
 3. **Visualização Analítica:** Gráfico de pizza/barras mostrando a distribuição de operadoras por estado (UF).
@@ -129,7 +129,7 @@ Desenvolver uma interface web para visualização dos dados das operadoras, perm
 > * **Decisão:** Uso de parâmetros `page` e `limit`.
 > * **Justificativa:** É a forma mais robusta de garantir que o usuário consiga navegar por grandes datasets sem comprometer a memória do navegador.
 
-### ### Como Executar
+###  Como Executar
 
 **Backend (Python):**
 1. Acesse a pasta `cd backend`.
