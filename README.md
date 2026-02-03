@@ -5,7 +5,8 @@ Este repositório contém a solução para o teste técnico de desenvolvimento J
 ##  Índice
 - [Questão 1: Web Scraping e ETL da ANS](#-questão-1-web-scraping-e-etl-da-ans)
 - [Questão 2: Transformação de Dados e Teste de Desempenho](#questão-2-transformação-de-dados-e-teste-de-desempenho)
-- [Questão 3: Em breve](#)
+- [Questão 3: Banco de Dados e Análise de Dados](#questão-3-banco-de-dados-e-análise-de-dados)
+- [Questão 4: Aplicação Full Stack (Dashboard ANS)](#-questão-4-aplicação-full-stack-dashboard-ans)
 
 ---
 
@@ -65,14 +66,81 @@ O desafio exigiu escolhas arquiteturais específicas. Abaixo, detalho as decisõ
 > * **Decisão:** Ordenação em Memória (`Collections.sort`) pós-agregação.
 > * **Justificativa:** A ordenação foi solicitada no resultado **agregado** (agrupado por Operadora). Mesmo processando milhões de linhas de despesas, o resultado final (número de operadoras únicas) é pequeno (< 2.000 registros). Ordenar uma lista desse tamanho em memória é computacionalmente barato e não justifica o uso de algoritmos de ordenação externa (External Merge Sort).
 
-### 🛠 Como Executar
+###  Como Executar
 1.  Certifique-se de que o arquivo `consolidado.csv` (gerado na Questão 1) e o arquivo `Relatorio_Cadop.csv` (baixado da ANS) estejam na raiz do projeto.
 2.  Execute a classe `Main.java` localizada no pacote `com.intuitivecare.questao2`.
 3.  O sistema irá processar os dados e gerar:
     * `despesas_agregadas.csv`: Relatório detalhado.
-    * `Teste_{Seu_Nome}.zip`: Arquivo final para entrega.
+    * `Teste_{Gustavo_Caldeira}.zip`: Arquivo final para entrega.
+
+## Questão 3: Banco de Dados e Análise de Dados
+
+###  Objetivo
+Estruturar os dados processados nas etapas anteriores em um banco de dados relacional e desenvolver queries analíticas complexas para extração de insights.
+
+###  Decisões Técnicas e Trade-offs (Justificativas)
+
+> **1. Normalização de Tabelas (Opção B)**
+> * **Decisão:** Optei por tabelas normalizadas separadas (Operadoras, Despesas Consolidadas e Despesas Agregadas).
+> * **Justificativa:** Dado o volume de dados e a baixa frequência de atualização cadastral vs. alta frequência de lançamentos financeiros, a normalização evita redundância, garante a integridade referencial e facilita a manutenção do esquema a longo prazo.
+
+> **2. Tipos de Dados para Valores Monetários**
+> * **Decisão:** Uso de `DECIMAL(15,2)` para campos de custo.
+> * **Justificativa:** Evita erros de arredondamento comuns em tipos de ponto flutuante (`FLOAT`), garantindo precisão absoluta para cálculos financeiros e auditoria.
+
+###  Consultas Analíticas Implementadas
+As queries foram desenvolvidas para resolver os seguintes desafios de negócio:
+1. **Crescimento Percentual:** Identificação das 5 operadoras com maior variação de despesas entre o primeiro e o último trimestre, tratando casos de operadoras sem dados em todos os períodos para evitar divisões por zero ou resultados nulos.
+2. **Distribuição Geográfica:** Listagem dos 5 estados com maiores despesas totais, incluindo o cálculo da média de gastos por operadora em cada UF.
+3. **Análise de Performance:** Filtro de operadoras que mantiveram despesas acima da média geral em pelo menos 2 dos 3 trimestres analisados.
+
+###  Como Executar
+1. **Ambiente:** Certifique-se de ter um servidor **MySQL (8.0+)** ou **PostgreSQL (10+)** instalado.
+2. **Importação:**
+   - Crie um banco de dados chamado `ans_despesas`.
+   - Execute o script DDL localizado em `/sql/setup_tabelas.sql` para criar a estrutura.
+   - Utilize o comando `LOAD DATA INFILE` ou a ferramenta de importação da sua IDE (DBeaver/Workbench) para carregar os arquivos CSV gerados nas Questões 1 e 2.
+3. **Análise:** Execute o arquivo `/sql/queries_analiticas.sql` para visualizar os resultados dos desafios de crescimento percentual e médias por UF.
 
 ---
 
-### 👤 Autor
-Desenvolvido como parte do processo seletivo da Intuitive Care.
+## Questão 4: Aplicação Full Stack (Dashboard ANS)
+
+### ### Objetivo
+Desenvolver uma interface web para visualização dos dados das operadoras, permitindo busca, paginação e análise visual por meio de gráficos.
+
+### ### Funcionalidades Implementadas
+1. **API RESTful:** Backend em Python para fornecimento de dados em tempo real.
+2. **Dashboard Dinâmico:** Interface Vue.js com filtragem instantânea por CNPJ ou Razão Social.
+3. **Visualização Analítica:** Gráfico de pizza/barras mostrando a distribuição de operadoras por estado (UF).
+4. **Paginação Inteligente:** Navegação de 10 em 10 registros para otimizar o carregamento.
+
+### ### Decisões Técnicas e Trade-offs (Justificativas)
+
+> **1. Framework Backend: FastAPI**
+> * **Decisão:** Uso do FastAPI em vez de Flask ou Django.
+> * **Justificativa:** O FastAPI oferece validação automática de dados e performance superior, além de simplificar a integração com o Frontend através do suporte nativo a CORS.
+
+> **2. Estratégia de Busca: Filtro no Cliente**
+> * **Decisão:** A busca é processada no Frontend após o carregamento da lista.
+> * **Justificativa:** Para um volume de ~1.100 registros, o processamento no navegador é instantâneo, reduzindo a latência e o número de requisições desnecessárias ao servidor.
+
+> **3. Paginação: Offset-based**
+> * **Decisão:** Uso de parâmetros `page` e `limit`.
+> * **Justificativa:** É a forma mais robusta de garantir que o usuário consiga navegar por grandes datasets sem comprometer a memória do navegador.
+
+### ### Como Executar
+
+**Backend (Python):**
+1. Acesse a pasta `cd backend`.
+2. Ative o ambiente virtual e execute: `python -m uvicorn main:app --reload`.
+
+**Frontend (Vue.js):**
+1. Acesse a pasta `cd frontend`.
+2. Instale as dependências: `npm install`.
+3. Inicie o servidor: `npm run dev`.
+
+---
+
+## 👨‍💻 Autor
+Desenvolvido por **Gustavo Caldeira** como parte do processo seletivo da **Intuitive Care**.
