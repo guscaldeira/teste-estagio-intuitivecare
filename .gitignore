@@ -1,24 +1,29 @@
-# Compiled class file
-*.class
+# ===========================
+# ADIÇÕES PARA O TESTE
+# ===========================
 
-# Log file
-*.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
+# Dados (Evitar subir arquivos pesados ou dados sensíveis)
+*.csv
 *.zip
-*.tar.gz
+*.pdf
 *.rar
+*.xlsx
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Python (Preparando para a Questão 4)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+.env
+
+# Sistema Operacional e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+target/
