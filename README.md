@@ -142,5 +142,5 @@ Desenvolver uma interface web para visualização dos dados das operadoras, perm
 
 ---
 
-## 👨‍💻 Autor
+##  Autor
 Desenvolvido por **Gustavo Caldeira** como parte do processo seletivo da **Intuitive Care**.
