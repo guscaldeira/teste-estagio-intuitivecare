@@ -115,7 +115,7 @@ Desenvolver uma interface web para visualização dos dados das operadoras, perm
 3. **Visualização Analítica:** Gráfico de pizza/barras mostrando a distribuição de operadoras por estado (UF).
 4. **Paginação Inteligente:** Navegação de 10 em 10 registros para otimizar o carregamento.
 
-### ### Decisões Técnicas e Trade-offs (Justificativas)
+###  Decisões Técnicas e Trade-offs (Justificativas)
 
 > **1. Framework Backend: FastAPI**
 > * **Decisão:** Uso do FastAPI em vez de Flask ou Django.
